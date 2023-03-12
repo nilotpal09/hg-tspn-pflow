@@ -1,0 +1,217 @@
+{
+    "name" : "hypergraph",
+
+    "version": "36",
+
+    "backprop_version": 2,
+    "frozen": true,
+    "info": "can freeze the first step (incidence learning) of the model",
+
+    "inc_assignment": "hard2",
+    "bool_inc": false,
+
+    "parallelization" : false,
+
+    "reduce_ds_train" : 50000,
+    "reduce_ds_val"   : 5000,
+
+    "num_epochs" : 30,
+    "num_workers" : 3,
+    "batchsize" : 32,
+    "effective_batchsize" : 32,
+    "learningrate" : 5e-4,
+    "lr_scheduler" : {
+        "T_max"     : 30,
+        "eta_min"   : 0,
+        "last_epoch": -1
+    },
+
+    "indicator_threshold": 0.5,
+
+    "N_BPTT" : 2,
+    "T_BPTT" : 4,
+    "T_TOTAL" : 16,
+
+    "inc_only_epochs" : 200,
+
+    "cosine_loss_wt": 4,
+    "inc_pos_wt": 4,
+    "ind_loss_wt": 10,
+    "inc_loss_wt": 10,
+    "inc_nonzero_wt": 1,
+    "mix_loss_wt": 1e6,
+    "hyperedge_loss_wt": 2,
+
+    "path_to_inc_dist": "/srv01/agrp/nilotpal/projects/SCD/SCD/particle_flow/experiments/incidence_info/epjc_data/incidence_dist_0.01_0.99_20bins.npz",
+
+    "resume_from_checkpoint": null,
+    "frozen_checkpoint": "/storage/agrp/nilotpal/PFlow/experiments/Set2Set/pflow-hypergraph/036910ed90d94e829964d8be8a03fe3e/checkpoints/epoch=109-step=341880.ckpt",
+
+    "path_to_train": "/storage/agrp/dreyet/PFlow/samples/singleJet/Ntuples_singleJet_noID_SuperResCosh_noThetaPhiSmearing_oldQPsmearing_01092022/train_histat_skim.root",
+    "path_to_valid": "/storage/agrp/dreyet/PFlow/samples/singleJet/Ntuples_singleJet_noID_SuperResCosh_noThetaPhiSmearing_oldQPsmearing_01092022/val_histat_skim.root",
+
+    "loss types" : ["incidence loss"],
+
+    "max_particles" : 30,
+
+    "embedding model": {
+        "track init layers": [
+            40,
+            40
+        ],
+        "track inputsize": 32,
+        "cell inputsize": 9,
+        "node net layers": [
+            100,
+            100
+        ],
+        "cell hidden size": 100,
+        "n iterations": [
+            1,
+            1,
+            1,
+            1
+        ],
+        "n GN blocks": 4,
+        "node init layers": [
+            100,
+            100
+        ],
+        "track hidden size": 100,
+        "node hidden size": 100
+    },
+    
+    "output model type" : "hypergraph",
+    "classes" : ["photon", "charged", "neutral", "electron", "muon"],
+  
+    "output model": {
+        "hyperedge_feature_size": 100,
+
+        "inc_proj_n_net_features" : [100],
+        "inc_proj_e_net_features" : [100],
+        "inc_proj_i_net_features" : [100],
+
+        "inc_net_features" : [200, 200],
+        "hyperedge_indicator_features": [200, 200],
+        "desc" : "only the middle layers. eg: [200, 200] will be [hyperedge_feature_size, 200, 200, 1]",
+
+        "ptetaphi_net_features": [300, 500, 300, 100],
+        "class_net_features": [300, 500, 300, 100],
+        "desc" : "only the middle layers. eg: [200, 30] will be [hyperedge_feature_size, 200, 30, num_class]",
+
+        "deepset_e_hid_features" : [150, 150],
+        "deepset_n_hid_features" : [150, 150],
+        "desc" : "only the middle layers. eg: [100, 100] will be [3*dim, 100, 100, dim]",
+
+        "n classes": 5,
+        "n charge classes": 3
+    },
+
+    
+    "var transform": {
+        "particle_pt":  {"mean": 8.50669 , "std": 1.09835 },
+        "particle_eta": {"mean": 0.02415 , "std": 1.45888 },
+        "particle_phi": {"mean": 0.0209 , "std": 1.8133 },
+
+        "track_d0": {"mean": -0.00353 , "std": 0.8925  },
+        "track_z0": {"mean": 0.00657 , "std": 1.36859  },
+        "track_pt": {"mean": 8.50669 , "std": 1.09835 },
+        "track_eta": {"mean": 0.02415 , "std": 1.45888 },
+        "track_phi": {"mean": 0.0209 , "std": 1.8133 },
+
+        "track_eta_layer_0": {"mean": 0.02415 , "std": 1.45888 },
+        "track_eta_layer_1": {"mean": 0.02415 , "std": 1.45888 },
+        "track_eta_layer_2": {"mean": 0.02415 , "std": 1.45888 },
+        "track_eta_layer_3": {"mean": 0.02415 , "std": 1.45888 },
+        "track_eta_layer_4": {"mean": 0.02415 , "std": 1.45888 },
+        "track_eta_layer_5": {"mean": 0.02415 , "std": 1.45888 },
+        
+        "track_phi_layer_0": {"mean": 0.0209 , "std": 1.8133 },
+        "track_phi_layer_1": {"mean": 0.0209 , "std": 1.8133 },
+        "track_phi_layer_2": {"mean": 0.0209 , "std": 1.8133 },
+        "track_phi_layer_3": {"mean": 0.0209 , "std": 1.8133 },
+        "track_phi_layer_4": {"mean": 0.0209 , "std": 1.8133 },
+        "track_phi_layer_5": {"mean": 0.0209 , "std": 1.8133 },
+        
+        "cell_x": {"mean": 3.06541 , "std": 1123.9369  },
+        "cell_y": {"mean": 11.33838 , "std": 1117.6396  },
+        "cell_z": {"mean": 46.2485 , "std": 2690.6433  },
+        "cell_eta": {"mean": 0.02415 , "std": 1.45888 },
+        "cell_phi": {"mean": 0.0209 , "std": 1.8133 },
+        "cell_e": {"mean": 3.71258 , "std": 1.59433  },
+
+        "topo_e": {"mean": 3.71258 , "std": 1.59433  },
+        "topo_eta": {"mean": 0.02415 , "std": 1.45888 },
+        "topo_phi": {"mean": 0.0209 , "std": 1.8133 }
+    },
+
+
+    "var transform (full)": {
+        "particle_pt": {"mean": 8.45695 , "std": 1.05136  },
+        "particle_eta": {"mean": 0.0024 , "std": 1.28561  },
+        "particle_phi": {"mean": 0.02059 , "std": 1.81528  },
+        "track_d0": {"mean": -0.00353 , "std": 0.8925  },
+        "track_z0": {"mean": 0.00657 , "std": 1.36859  },
+        "track_pt": {"mean": 8.59876 , "std": 1.17485  },
+        "track_eta": {"mean": 0.00018 , "std": 1.30933  },
+        "track_phi": {"mean": 0.01695 , "std": 1.8164  },
+        "sinu_track_phi": {"mean": 0.00689 , "std": 0.70714  },
+        "cosin_track_phi": {"mean": -0.00118 , "std": 0.70704  },
+        "track_eta_layer_0": {"mean": 0.00075 , "std": 1.32077  },
+        "track_eta_layer_1": {"mean": 0.00076 , "std": 1.32292  },
+        "track_eta_layer_2": {"mean": 0.00076 , "std": 1.32365  },
+        "track_eta_layer_3": {"mean": 0.00076 , "std": 1.32379  },
+        "track_eta_layer_4": {"mean": 0.00075 , "std": 1.3226  },
+        "track_eta_layer_5": {"mean": 0.00075 , "std": 1.321  },
+        "track_phi_layer_0": {"mean": 0.02042 , "std": 1.81529  },
+        "track_phi_layer_1": {"mean": 0.01952 , "std": 1.81503  },
+        "track_phi_layer_2": {"mean": 0.01747 , "std": 1.81494  },
+        "track_phi_layer_3": {"mean": 0.01715 , "std": 1.81487  },
+        "track_phi_layer_4": {"mean": 0.01513 , "std": 1.81481  },
+        "track_phi_layer_5": {"mean": 0.01303 , "std": 1.81477  },
+        "sinu_track_phi_layer_0": {"mean": 0.0067 , "std": 0.70748  },
+        "sinu_track_phi_layer_1": {"mean": 0.00654 , "std": 0.70763  },
+        "sinu_track_phi_layer_2": {"mean": 0.00642 , "std": 0.70773  },
+        "sinu_track_phi_layer_3": {"mean": 0.00629 , "std": 0.70783  },
+        "sinu_track_phi_layer_4": {"mean": 0.00605 , "std": 0.70799  },
+        "sinu_track_phi_layer_5": {"mean": 0.0059 , "std": 0.70808  },
+        "cosin_track_phi_layer_0": {"mean": -0.00062 , "std": 0.7067  },
+        "cosin_track_phi_layer_1": {"mean": -0.00053 , "std": 0.70656  },
+        "cosin_track_phi_layer_2": {"mean": -0.00047 , "std": 0.70646  },
+        "cosin_track_phi_layer_3": {"mean": -0.00041 , "std": 0.70635  },
+        "cosin_track_phi_layer_4": {"mean": -0.0003 , "std": 0.7062  },
+        "cosin_track_phi_layer_5": {"mean": -0.00024 , "std": 0.70611  },
+        "cell_x": {"mean": 3.06541 , "std": 1123.9369  },
+        "cell_y": {"mean": 11.33838 , "std": 1117.6396  },
+        "cell_z": {"mean": 46.2485 , "std": 2690.6433  },
+        "cell_eta": {"mean": 0.02663 , "std": 1.47358  },
+        "cell_phi": {"mean": 0.02123 , "std": 1.8131  },
+        "cosin_cell_phi": {"mean": 0.00203 , "std": 0.70792  },
+        "sinu_cell_phi": {"mean": 0.00787 , "std": 0.70624  },
+        "cell_e": {"mean": 3.71258 , "std": 1.59433  },
+
+        "combined_pt":  {"mean": 8.50669 , "std": 1.09835 },
+        "combined_eta": {"mean": 0.02415 , "std": 1.45888 },
+        "combined_phi": {"mean": 0.0209 , "std": 1.8133 }
+    },
+
+
+    "sample_details": {
+        "train": {
+            "num_events": 30232,
+            "num_nodes":     { "max": 51, "min:": 2 },
+            "num_particles": { "max": 22, "min:": 1 }
+        },
+        "validation": {
+            "num_events": 2914,
+            "num_nodes":     { "max": 45, "min:": 2 },
+            "num_particles": { "max": 20, "min:": 1 }
+        },
+        "test": {
+            "num_events": 44785,
+            "num_nodes":     { "max": 49, "min:": 2 },
+            "num_particles": { "max": 23, "min:": 1 }
+        }
+    }
+}
+
