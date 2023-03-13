@@ -1,0 +1,269 @@
+{
+    "name": "condensation",
+    "num_epochs": 1000,
+    "num_workers": 3,
+    "batchsize": 96,
+    "reduce_ds": 50000,
+    "learningrate": 1e-06,
+    "path_to_train": "/storage/agrp/dreyet/PFlow/samples/singleJet/Ntuples_singleJet_noID_SuperResCosh_noThetaPhiSmearing_oldQPsmearing_01092022/train_histat_skim.root",
+    "path_to_valid": "/storage/agrp/dreyet/PFlow/samples/singleJet/Ntuples_singleJet_noID_SuperResCosh_noThetaPhiSmearing_oldQPsmearing_01092022/val_histat_skim.root",
+    "path_to_test": "/storage/agrp/dreyet/PFlow/samples/singleJet/Ntuples_singleJet_noID_SuperResCosh_noThetaPhiSmearing_oldQPsmearing_01092022/test_histat_skim.root",
+    "scatter dir": "/storage/agrp/dreyet/PFlow/SCD/particle_flow/experiments/05102022_noID_SuperResCosh_singleJet_back2thefuture/scatter",
+    "output model type": "condensation",
+    "loss types": [
+        "node loss",
+        "beta loss",
+        "x loss"
+    ],
+    "use_BCE_beta_loss": true,
+    "use_zeta_CPs": true,
+    "truth inference": 0,
+    "cell class weights": [3.0,15.0,1.0],
+    "track class weights": [1.0,10.0,1.0],
+    "bkg classes": [],
+    "s_b": 0.5,
+    "s_c": 0.4,
+    "qmin": 0.25,
+    "t_b": 0.8,
+    "t_d": 0.8,
+    "t_b_opt": [0.7, 0.65, 0.6, 0.6, 0.6],
+    "t_d_opt": [0.6, 0.7, 0.8, 0.8, 0.8],
+    "bin_opt": [0.0, 2.0, 5.0, 10.0, 25.0, 50.0],
+    "embedding model": {
+        "track init layers": [
+            40,
+            40
+        ],
+        "track inputsize": 26,
+        "node net layers": [
+            100,
+            100
+        ],
+        "cell hidden size": 100,
+        "n iterations": [
+            1,
+            1,
+            1,
+            1
+        ],
+        "n GN blocks": 4,
+        "node init layers": [
+            100,
+            100
+        ],
+        "cell inputsize": 11,
+        "track hidden size": 100
+    },
+    "output model": {
+        "node inputsize": 212,
+        "n cell classes": 3,
+        "n track classes": 3,
+        "n charge classes": 3,
+        "x size": 10,
+        "cell classifer layers": [
+            516,
+            256,
+            120,
+            120,
+            100,
+            100
+        ],
+        "track classifer layers": [
+            516,
+            256,
+            120,
+            120,
+            100,
+            100
+        ],
+        "pt prediction layers": [
+            516,
+            256,
+            120,
+            120,
+            100,
+            50
+        ],
+        "eta prediction layers": [
+            256,
+            120,
+            120,
+            100,
+            50
+        ],
+        "xhatyhat prediction layers": [
+            256,
+            120,
+            120,
+            100,
+            100
+        ],
+        "beta net layers": [
+            516,
+            256,
+            120,
+            120,
+            100,
+            100
+        ],
+        "x net layers": [
+            516,
+            256,
+            256,
+            120,
+            120,
+            100,
+            100
+        ]
+    },
+    "var transform": {
+        "track_phi": {
+            "std": 1.0,
+            "mean": 0
+        },
+        "cell_z": {
+            "std": 1.0,
+            "mean": 0.0
+        },
+        "cell_y": {
+            "std": 1.0,
+            "mean": 0.0
+        },
+        "cell_x": {
+            "std": 1.0,
+            "mean": 0.0
+        },
+        "cell_e": {
+            "std": 1.0,
+            "mean": 0.0
+        },
+        "track_qoverp": {
+            "std": 0.00032278604,
+            "mean": 3.8994799e-07
+        },
+        "track_d0": {
+            "std": 1.0,
+            "mean": 0.0
+        },
+        "track_z0": {
+            "std": 1.0,
+            "mean": 0.0
+        },
+        "track_eta": {
+            "std": 1.0,
+            "mean": 0.0
+        },
+        "track_theta": {
+            "std": 1.0,
+            "mean": 0.0
+        },
+        "cell_eta": {
+            "std": 1.0,
+            "mean": 0.0
+        },
+        "cell_phi": {
+            "mean": 0,
+            "std": 1.0
+        },
+        "particle_prod_x": {
+            "mean": 0.0,
+            "std": 1.0
+        },
+        "particle_prod_y": {
+            "mean": 0.0,
+            "std": 1.0
+        },
+        "particle_prod_z": {
+            "mean": 0.0,
+            "std": 1.0
+        },
+        "p_x": {
+            "mean": 0.0,
+            "std": 1.0
+        },
+        "p_y": {
+            "mean": 0.0,
+            "std": 1.0
+        },
+        "p_z": {
+            "mean": 0.0,
+            "std": 1.0
+        },
+        "particle_phi": {
+            "mean": 0.0,
+            "std": 1.0
+        },
+        "particle_xhat": {
+            "mean": 0.0,
+            "std": 1.0
+        },
+        "particle_yhat": {
+            "mean": 0.0,
+            "std": 1.0
+        },
+        "particle_pt": {
+            "std": 0.8706613,
+            "mean": 6.3988786
+        },
+        "track_pt": {
+            "std": 0.8706613,
+            "mean": 6.3988786
+        },
+        "track_eta_layer_0": {
+            "std": 1.0,
+            "mean": 0.0
+        },
+        "track_eta_layer_1": {
+            "std": 1.0,
+            "mean": 0.0
+        },
+        "track_eta_layer_2": {
+            "std": 1.0,
+            "mean": 0.0
+        },
+        "track_eta_layer_3": {
+            "std": 1.0,
+            "mean": 0.0
+        },
+        "track_eta_layer_4": {
+            "std": 1.0,
+            "mean": 0.0
+        },
+        "track_eta_layer_5": {
+            "std": 1.0,
+            "mean": 0.0
+        },
+        "track_phi_layer_0": {
+            "std": 1.0,
+            "mean": 0.0
+        },
+        "track_phi_layer_1": {
+            "std": 1.0,
+            "mean": 0.0
+        },
+        "track_phi_layer_2": {
+            "std": 1.0,
+            "mean": 0.0
+        },
+        "track_phi_layer_3": {
+            "std": 1.0,
+            "mean": 0.0
+        },
+        "track_phi_layer_4": {
+            "std": 1.0,
+            "mean": 0.0
+        },
+        "track_phi_layer_5": {
+            "std": 1.0,
+            "mean": 0.0
+        },
+        "particle_theta": {
+            "std": 1.0,
+            "mean": 0.0
+        },
+        "particle_eta": {
+            "std": 1.0,
+            "mean": 0.0
+        }
+    }
+}
